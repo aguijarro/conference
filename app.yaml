@@ -1,0 +1,48 @@
+application: conferences-1320
+version: 1
+runtime: python27
+threadsafe: true
+api_version: 1
+
+# Handlers tell App Engine how to route requests to your application.
+handlers:
+
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+
+- url: /js
+  static_dir: static/js
+
+- url: /img
+  static_dir: static/img
+
+- url: /css
+  static_dir: static/bootstrap/css
+
+- url: /fonts
+  static_dir: static/fonts
+
+- url: /partials
+  static_dir: static/partials
+
+- url: /
+  static_files: templates/index.html
+  upload: templates/index\.html
+  secure: always
+
+
+# This handler routes requests to your APIs to your Endpoints code.
+# See https://developers.google.com/appengine/docs/python/endpoints/
+- url: /_ah/spi/.*
+  script: conference.APP
+  secure: always
+
+libraries:
+# You must include the Endpoints library if you wish to serve an API.
+- name: endpoints
+  version: 1.0
+
+# pycrypto library used for OAuth2 (req'd for authenticated APIs)
+- name: pycrypto
+  version: latest
